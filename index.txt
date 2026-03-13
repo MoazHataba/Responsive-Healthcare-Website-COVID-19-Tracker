@@ -1,0 +1,68 @@
+// Selection Sort
+
+int maxIndex(int a[], int i, int j) {
+    if (i == j) return i;
+    int k = maxIndex(a, i + 1, j);
+    return (a[i] > a[k]) ? i : k;
+}
+
+void recurSelectionSort(int a[], int n, int index = 0) {
+    if (index == n) return;
+    int k = maxIndex(a, index, n - 1);
+    if (k != index)
+        swap(a[k], a[index]);
+    recurSelectionSort(a, n, index + 1);
+}
+
+//===============================================================================
+
+// Bubble Sort
+
+void bubbleSortRec(int arr[], int n) {
+    if (n == 1) return; // Base case
+    bool swapped = false;
+    for (int i = 0; i < n - 1; i++) {
+        if (arr[i] > arr[i + 1]) {
+            swap(arr[i], arr[i + 1]);
+            swapped = true;
+        }
+    }
+    if (swapped) {
+        bubbleSortRec(arr, n - 1);
+    }
+}
+
+//===============================================================================
+
+// Insertion Sort
+
+void insertionSortRecursive(int arr[], int n) {
+    if (n <= 1) return;
+    insertionSortRecursive(arr, n - 1);
+    int last = arr[n - 1];
+    int j = n - 2;
+    
+    while (j >= 0 && arr[j] > last) {
+        arr[j + 1] = arr[j];
+        j--;
+    }
+    arr[j + 1] = last;
+}
+
+//===============================================================================
+
+// Merge Sort
+
+void mergeSort(int arr[], int left, int right) {
+    if (left >= right) return;
+    
+    int mid = left + (right - left) / 2;
+    mergeSort(arr, left, mid);
+    mergeSort(arr, mid + 1, right);
+    merge(arr, left, mid, right);
+}
+
+//===============================================================================
+
+// Quick Sort
+
